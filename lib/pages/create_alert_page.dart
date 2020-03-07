@@ -1,5 +1,6 @@
 import 'package:alertmtc/unicorn_button.dart';
 import 'package:flutter/material.dart';
+//import 'package:image_picker/image_picker.dart';
 
 class CreateAlertPage extends StatefulWidget {
   CreateAlertPage({Key key}) : super(key: key);
@@ -57,10 +58,11 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
               getEmergencyTypes(),
               SizedBox(height: 15),
               getGrades(),
-              SizedBox(height: 15),
-              //takePictureBtn(),
+              SizedBox(height: 85),
+              takePictureBtn(),
+              SizedBox(height: 30),
               createAlertBtn(),
-              SizedBox(height: 50),
+              SizedBox(height: 40),
             ],
           ),
         ),
@@ -72,7 +74,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Column(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+          padding: EdgeInsets.only(left: 20, top: 10, bottom: 30),
           alignment: Alignment.centerLeft,
           child: Text(
             'Tipo de Emergencia',
@@ -92,6 +94,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
                 emergencyOne(),
               ],
             ),
+            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -135,7 +138,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
                   "assets/images/fire.png",
                 ),
               ),
-              Text("Incendio")
+              Text(
+                "Incendio",
+                style: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 14,
+                ),
+              )
             ],
           ),
         ),
@@ -147,7 +156,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Column(
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+          padding: EdgeInsets.only(left: 20, top: 20, bottom: 30),
           alignment: Alignment.centerLeft,
           child: Text(
             'Grado / Intensidad',
@@ -251,7 +260,19 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     );
   }
 
-  takePictureBtn() {}
+  takePictureBtn() {
+    return CircleAvatar(
+      radius: 35,
+      child: CircleAvatar(
+        radius: 34,
+        backgroundColor: Colors.white,
+        foregroundColor: Color(0xFFD40C16),
+        child: Icon(
+          Icons.photo_camera,
+        ),
+      ),
+    );
+  }
 
   Widget createAlertBtn() {
     return SizedBox(
@@ -261,9 +282,15 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
         child: RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(
-              vertical: 12.0,
+              vertical: 15.0,
             ),
-            child: Text('Enviar alerta'),
+            child: Text(
+              'Enviar alerta',
+              style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+              ),
+            ),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),

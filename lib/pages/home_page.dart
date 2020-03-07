@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
               'SOS',
             ),
           ),
+           backgroundColor: Color(0xFFD40C16),
         ),
         drawer: _hamburguerMenu(),
         bottomNavigationBar: _bottomNavigationBar(),
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ));
+        
   }
 
   _hamburguerMenu() {
