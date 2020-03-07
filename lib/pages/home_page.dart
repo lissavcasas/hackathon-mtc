@@ -1,4 +1,4 @@
-import 'package:alertmtc/pages/create_alert_page.dart';
+import 'package:alertmtc/pages/sos_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,52 +9,29 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+  static List<Widget> _widgetOptions = <Widget>[
+    SOSPage(),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: Text(
-            'SOS',
-          ),
-        ),
-      ),
-      drawer: _hamburguerMenu(),
-      bottomNavigationBar: _bottomNavigationBar(),
-      //la idea es que el body sea el mapa de google maps con el boton de alerta
-      //cuando se haga tap en el boton de alerta, debe redirigir a la vista de createalert
-      body: Center(
-        child: ClipOval(
-          child: Material(
-            color: const Color(0xFFD40C16), // button color
-            child: InkWell(
-              splashColor: Colors.redAccent, // inkwell color
-              child: SizedBox(
-                width: 56,
-                height: 56,
-                child: Center(
-                  child: Text(
-                    'SOS',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (BuildContext context) {
-                  return CreateAlertPage();
-                }));
-              },
+        appBar: AppBar(
+          centerTitle: false,
+          title: Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Text(
+              'SOS',
             ),
           ),
         ),
-      ),
-    );
+        drawer: _hamburguerMenu(),
+        bottomNavigationBar: _bottomNavigationBar(),
+        //la idea es que el body sea el mapa de google maps con el boton de alerta
+        //cuando se haga tap en el boton de alerta, debe redirigir a la vista de createalert
+        body: Center(
+          child: _widgetOptions.elementAt(_selectedIndex),
+        ));
   }
 
   _hamburguerMenu() {
@@ -97,6 +74,8 @@ class _HomePageState extends State<HomePage> {
       selectedIconTheme: IconThemeData(color: Color(0xFFD40C16)),
       selectedLabelStyle: TextStyle(color: Color(0xFFD40C16)),
       selectedFontSize: 14,
+      currentIndex: _selectedIndex,
+      onTap: _onSelectItem,
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.add_alert),
@@ -114,5 +93,11 @@ class _HomePageState extends State<HomePage> {
       //currentIndex: _selectedIndex,
       //onTap: _onItemTapped,
     );
+  }
+
+  _onSelectItem(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
