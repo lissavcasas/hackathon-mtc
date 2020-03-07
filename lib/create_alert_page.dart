@@ -1,3 +1,4 @@
+import 'package:alertmtc/unicorn_button.dart';
 import 'package:flutter/material.dart';
 
 class CreateAlertPage extends StatefulWidget {
@@ -70,6 +71,15 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
 
   Widget getEmergencyType() {
     return Container(
+      padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        'Tipo de Emergencia',
+        style: TextStyle(
+            fontFamily: 'OpenSans', fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+    );
+    /* return Container(
       padding: const EdgeInsets.all(10.0),
       child: TextField(
         textCapitalization: TextCapitalization.sentences,
@@ -79,20 +89,34 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           labelStyle: TextStyle(fontFamily: 'OpenSans', fontSize: 16),
         ),
       ),
-    );
+    ); */
   }
 
   Widget getGrade() {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: TextField(
-        textCapitalization: TextCapitalization.sentences,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.all(10.0),
-          labelText: 'Grado',
-          labelStyle: TextStyle(fontFamily: 'OpenSans', fontSize: 16),
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+          alignment: Alignment.centerLeft,
+          child: Text(
+            'Grado / Intensidad',
+            style: TextStyle(
+                fontFamily: 'OpenSans',
+                fontSize: 16,
+                fontWeight: FontWeight.bold),
+          ),
         ),
-      ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            gradeOne(),
+            gradeTwo(),
+            gradeThree(),
+            gradeFour(),
+            gradeFive(),
+          ],
+        ),
+      ],
     );
   }
 
@@ -114,10 +138,92 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
             borderRadius: BorderRadius.circular(5.0),
           ),
           elevation: 1,
-          //color: Color(0xFFD40C16),
-          //textColor: Colors.white,
-          //onPressed: ,
+          color: Color(0xFFD40C16),
+          textColor: Colors.white,
+          onPressed: () {
+            print('holi');
+          },
         ),
+      ),
+    );
+  }
+
+  Widget gradeOne() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: UnicornOutlineButton(
+        strokeWidth: 4,
+        radius: 24,
+        gradient: LinearGradient(colors: [
+          Colors.green[800],
+          Colors.greenAccent,
+        ]),
+        child: Text('1', style: TextStyle(fontSize: 16)),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget gradeTwo() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: UnicornOutlineButton(
+        strokeWidth: 4,
+        radius: 24,
+        gradient: LinearGradient(colors: [
+          Colors.green[800],
+          Colors.yellow[800],
+        ]),
+        child: Text('2', style: TextStyle(fontSize: 16)),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget gradeThree() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: UnicornOutlineButton(
+        strokeWidth: 4,
+        radius: 24,
+        gradient: LinearGradient(colors: [
+          Colors.yellow[800],
+          Colors.orangeAccent,
+        ]),
+        child: Text('3', style: TextStyle(fontSize: 16)),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget gradeFour() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: UnicornOutlineButton(
+        strokeWidth: 4,
+        radius: 24,
+        gradient: LinearGradient(colors: [
+          Colors.orangeAccent,
+          Colors.orange[900],
+        ]),
+        child: Text('4', style: TextStyle(fontSize: 16)),
+        onPressed: () {},
+      ),
+    );
+  }
+
+  Widget gradeFive() {
+    return Container(
+      padding: EdgeInsets.all(5),
+      child: UnicornOutlineButton(
+        strokeWidth: 4,
+        radius: 24,
+        gradient: LinearGradient(colors: [
+          Colors.orange[900],
+          Colors.redAccent,
+        ]),
+        child: Text('5', style: TextStyle(fontSize: 16)),
+        onPressed: () {},
       ),
     );
   }
