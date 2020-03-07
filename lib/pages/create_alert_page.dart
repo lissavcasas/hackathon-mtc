@@ -1,15 +1,21 @@
+import 'dart:io';
+
+import 'package:alertmtc/providers/alert_report_provider.dart';
 import 'package:alertmtc/unicorn_button.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 //import 'package:image_picker/image_picker.dart';
 
 class CreateAlertPage extends StatefulWidget {
-  CreateAlertPage({Key key}) : super(key: key);
-
   @override
   _CreateAlertPageState createState() => _CreateAlertPageState();
 }
 
 class _CreateAlertPageState extends State<CreateAlertPage> {
+  final _scaffolKey = new GlobalKey<ScaffoldState>();
+  String _urlAvatar;
+  File _image;
+  final alertReportProvider = new AlertReportProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -261,17 +267,47 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   }
 
   takePictureBtn() {
-    return CircleAvatar(
-      radius: 35,
-      child: CircleAvatar(
-        radius: 34,
-        backgroundColor: Colors.white,
-        foregroundColor: Color(0xFFD40C16),
-        child: Icon(
-          Icons.photo_camera,
+    print(_image);
+    if (_image == null) {
+      return InkWell(
+        borderRadius: BorderRadius.circular(35),
+        onTap: openCamera,
+        child: CircleAvatar(
+          radius: 35,
+          child: CircleAvatar(
+            radius: 34,
+            backgroundColor: Colors.white,
+            foregroundColor: Color(0xFFD40C16),
+            child: Icon(
+              Icons.photo_camera,
+            ),
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      return InkWell(
+        borderRadius: BorderRadius.circular(45),
+        onTap: openCamera,
+        child: Container(
+          width: 100.0,
+          height: 100.0,
+          decoration: new BoxDecoration(
+            shape: BoxShape.circle,
+            image: new DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage(_image.path),
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  void openCamera() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      _image = image;
+    });
   }
 
   Widget createAlertBtn() {
@@ -300,9 +336,25 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           textColor: Colors.white,
           onPressed: () {
             print('holi');
+            _updateUserLogged();
           },
         ),
       ),
     );
+  }
+
+  _updateUserLogged() async {
+    print("------------");
+    print(_image);
+    final response = await alertReportProvider.storeTicket(
+        type: "1", severity: 1, files: _image, latitude: "1", longitude: "2");
+    print("********");
+    if (response['codigo'] == 200) {
+      final snackBar = SnackBar(content: Text(response['mensaje']));
+      _scaffolKey.currentState.showSnackBar(snackBar);
+    } else {
+      final snackBar = SnackBar(content: Text(response['mensaje']));
+      _scaffolKey.currentState.showSnackBar(snackBar);
+    }
   }
 }
