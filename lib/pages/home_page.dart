@@ -1,3 +1,5 @@
+import 'package:alertmtc/pages/emergencies_page.dart';
+import 'package:alertmtc/pages/historial_page.dart';
 import 'package:alertmtc/pages/sos_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +14,8 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     SOSPage(),
+    HistorialPage(),
+    EmergenciesPage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -44,18 +48,6 @@ class _HomePageState extends State<HomePage> {
           child: DrawerHeader(
             child: SizedBox(),
           ),
-        ),
-        ListTile(
-          leading: Icon(Icons.add_alert),
-          title: Text('Sos'),
-        ),
-        ListTile(
-          leading: Icon(Icons.list),
-          title: Text('Historial'),
-        ),
-        ListTile(
-          leading: Icon(Icons.help),
-          title: Text('Emergencias'),
         ),
         ListTile(
           leading: Icon(Icons.person),
