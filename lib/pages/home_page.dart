@@ -1,14 +1,14 @@
-import 'package:alertmtc/create_alert_page.dart';
+import 'package:alertmtc/pages/create_alert_page.dart';
 import 'package:flutter/material.dart';
 
-class SosPage extends StatefulWidget {
-  SosPage({Key key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key}) : super(key: key);
 
   @override
-  _SosPageState createState() => _SosPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _SosPageState extends State<SosPage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
