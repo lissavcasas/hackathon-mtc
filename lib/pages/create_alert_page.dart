@@ -18,8 +18,17 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     'Caída de vehículo en movimiento',
     'Otros'
   ];
+  List<String> _grades = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+  ];
   int _selectedIndex = 0;
+  int _index = 0;
   String type = '';
+  int severity;
 
   @override
   Widget build(BuildContext context) {
@@ -455,10 +464,15 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           Colors.greenAccent,
         ]),
         child: Text(
-          '1',
+          _grades.elementAt(_index),
           style: TextStyle(fontSize: 16),
         ),
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            severity = int.parse(_grades.elementAt(_index));
+          });
+          print('el grado seleccionado es: $severity');
+        },
       ),
     );
   }
@@ -473,8 +487,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           Colors.green[800],
           Colors.yellow[800],
         ]),
-        child: Text('2', style: TextStyle(fontSize: 16)),
-        onPressed: () {},
+        child: Text(_grades.elementAt(1), style: TextStyle(fontSize: 16)),
+        onPressed: () {
+          setState(() {
+            severity = int.parse(_grades.elementAt(1));
+          });
+          print('el grado seleccionado es: $severity');
+        },
       ),
     );
   }
@@ -489,8 +508,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           Colors.yellow[800],
           Colors.orangeAccent,
         ]),
-        child: Text('3', style: TextStyle(fontSize: 16)),
-        onPressed: () {},
+        child: Text(_grades.elementAt(2), style: TextStyle(fontSize: 16)),
+        onPressed: () {
+          setState(() {
+            severity = int.parse(_grades.elementAt(2));
+          });
+          print('el grado seleccionado es: $severity');
+        },
       ),
     );
   }
@@ -505,8 +529,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           Colors.orangeAccent,
           Colors.orange[900],
         ]),
-        child: Text('4', style: TextStyle(fontSize: 16)),
-        onPressed: () {},
+        child: Text(_grades.elementAt(3), style: TextStyle(fontSize: 16)),
+        onPressed: () {
+          setState(() {
+            severity = int.parse(_grades.elementAt(3));
+          });
+          print('el grado seleccionado es: $severity');
+        },
       ),
     );
   }
@@ -521,8 +550,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           Colors.orange[900],
           Colors.redAccent,
         ]),
-        child: Text('5', style: TextStyle(fontSize: 16)),
-        onPressed: () {},
+        child: Text(_grades.elementAt(4), style: TextStyle(fontSize: 16)),
+        onPressed: () {
+          setState(() {
+            severity = int.parse(_grades.elementAt(4));
+          });
+          print('el grado seleccionado es: $severity');
+        },
       ),
     );
   }
