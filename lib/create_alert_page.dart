@@ -99,7 +99,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   takePictureBtn() {}
 
   Widget createAlertBtn() {
-      return SizedBox(
+    return SizedBox(
       width: double.infinity,
       child: Container(
         padding: const EdgeInsets.all(10),

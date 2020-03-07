@@ -1,5 +1,5 @@
-import 'package:alertmtc/sos_page.dart';
 import 'package:flutter/material.dart';
+import 'src/routes/routes.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         primaryColor: const Color(0xFFD40C16),
       ),
-      home: SosPage(),
+      initialRoute: 'home-page',
+      routes: getApplicationRoutes(),
     );
   }
 }
