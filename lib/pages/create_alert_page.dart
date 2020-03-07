@@ -13,12 +13,12 @@ class CreateAlertPage extends StatefulWidget {
 
 class _CreateAlertPageState extends State<CreateAlertPage> {
   final _scaffolKey = new GlobalKey<ScaffoldState>();
-  String _urlAvatar;
   File _image;
   final alertReportProvider = new AlertReportProvider();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffolKey,
       appBar: AppBar(
         centerTitle: false,
         title: Padding(
@@ -267,7 +267,6 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   }
 
   takePictureBtn() {
-    print(_image);
     if (_image == null) {
       return InkWell(
         borderRadius: BorderRadius.circular(35),
@@ -349,11 +348,11 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     final response = await alertReportProvider.storeTicket(
         type: "1", severity: 1, files: _image, latitude: "1", longitude: "2");
     print("********");
-    if (response['codigo'] == 200) {
-      final snackBar = SnackBar(content: Text(response['mensaje']));
+    if (response['code'] == 200) {
+      final snackBar = SnackBar(content: Text(response['message']));
       _scaffolKey.currentState.showSnackBar(snackBar);
     } else {
-      final snackBar = SnackBar(content: Text(response['mensaje']));
+      final snackBar = SnackBar(content: Text(response['message']));
       _scaffolKey.currentState.showSnackBar(snackBar);
     }
   }

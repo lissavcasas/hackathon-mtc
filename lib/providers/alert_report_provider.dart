@@ -21,10 +21,11 @@ class AlertReportProvider {
     FormData formData = new FormData.fromMap({
       "type": type,
       "severity": severity,
-      "files": files,
+      "files": await MultipartFile.fromFile(files.path, filename: "avatar.png"),
       "latitude": latitude,
       "longitude": longitude
     });
+    print(files);
     try {
       final response = await dio.post(url,
           data: formData, options: Options(headers: headers));
