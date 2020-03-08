@@ -1,4 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 import 'create_alert_page.dart';
 
 class SOSPage extends StatefulWidget {
@@ -7,45 +10,55 @@ class SOSPage extends StatefulWidget {
 }
 
 class _SOSPageState extends State<SOSPage> {
+  Location location = new Location();
+  CameraPosition _latLongMap = CameraPosition(
+    target: LatLng(-12.0463717, -77.0427533),
+    zoom: 14.4746,
+  );
+
+  Completer<GoogleMapController> _mapController = Completer();
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Center(
-          child: Image.asset(
-            "assets/images/map.png",
-          ),
+    return Scaffold(
+        body: GoogleMap(
+          mapType: MapType.normal,
+          initialCameraPosition: _latLongMap,
+          onMapCreated: (GoogleMapController controller) {
+            _mapController.complete(controller);
+          },
         ),
-        Center(
-          child: ClipOval(
-            child: Material(
-              color: const Color(0xFFD40C16), // button color
-              child: InkWell(
-                splashColor: Colors.redAccent, // inkwell color
-                child: SizedBox(
-                  width: 56,
-                  height: 56,
-                  child: Center(
-                    child: Text(
-                      'SOS',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (BuildContext context) {
-                    return CreateAlertPage();
-                  }));
-                },
+        floatingActionButton: Row(
+          children: <Widget>[
+            SizedBox(width: 20),
+            Container(
+              height: 40,
+              child: FloatingActionButton(
+                heroTag: 'btn1',
+                backgroundColor: Colors.blueGrey,
+                child: Icon(Icons.add_location),
+                onPressed: _myLocation,
               ),
             ),
-          ),
-        ),
-      ],
+            Expanded(child: SizedBox()),
+            FloatingActionButton(
+              heroTag: 'btn2',
+              backgroundColor: Color(0xFFD40C16),
+              child: Text('SOS'),
+              onPressed: () {
+                Navigator.of(context).pushNamed('create-alert-page');
+              },
+            )
+          ],
+        ));
+  }
+
+  void _myLocation() async {
+    final pos = await location.getLocation();
+    final myLocation = CameraPosition(
+      target: LatLng(pos.latitude, pos.longitude),
+      zoom: 14.4746,
     );
+    final GoogleMapController controller = await _mapController.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(myLocation));
   }
 }

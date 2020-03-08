@@ -276,7 +276,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.19,
-       decoration: new BoxDecoration(
+      decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Colors.grey[50],
@@ -323,7 +323,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.19,
-       decoration: new BoxDecoration(
+      decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Colors.grey[50],
@@ -370,7 +370,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.19,
-       decoration: new BoxDecoration(
+      decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
             color: Colors.grey[50],
