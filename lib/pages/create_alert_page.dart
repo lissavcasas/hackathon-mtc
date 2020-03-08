@@ -1,9 +1,9 @@
 import 'dart:io';
-
 import 'package:alertmtc/providers/alert_report_provider.dart';
 import 'package:alertmtc/unicorn_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart';
 //import 'package:image_picker/image_picker.dart';
 
 class CreateAlertPage extends StatefulWidget {
@@ -13,7 +13,6 @@ class CreateAlertPage extends StatefulWidget {
 
 class _CreateAlertPageState extends State<CreateAlertPage> {
   final _scaffolKey = new GlobalKey<ScaffoldState>();
-  File _image;
   final alertReportProvider = new AlertReportProvider();
   List<String> _accidents = [
     'Atropello común',
@@ -34,6 +33,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   int _index = 0;
   String type = '';
   int severity;
+  File _image;
 
   @override
   Widget build(BuildContext context) {
@@ -643,14 +643,22 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   }
 
   _updateUserLogged() async {
-    print("------------");
-    print(_image);
+    Location location = new Location();
+    final pos = await location.getLocation();
     final response = await alertReportProvider.storeTicket(
-        type: "1", severity: 1, files: _image, latitude: "1", longitude: "2");
-    print("********");
+        type: type,
+        severity: severity,
+        files: _image,
+        latitude: pos.latitude.toString(),
+        longitude: pos.longitude.toString());
     if (response['code'] == 200) {
       final snackBar = SnackBar(content: Text(response['message']));
       _scaffolKey.currentState.showSnackBar(snackBar);
+      setState(() {
+        type = null;
+        severity = null;
+        _image = null;
+      });
     } else {
       final snackBar = SnackBar(content: Text(response['message']));
       _scaffolKey.currentState.showSnackBar(snackBar);
