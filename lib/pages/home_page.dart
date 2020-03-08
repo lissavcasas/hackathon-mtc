@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
     HistorialPage(),
     EmergenciesPage(),
   ];
+  List<String> _title = ['SOS', 'Historial', 'Emergencias'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +26,9 @@ class _HomePageState extends State<HomePage> {
           centerTitle: false,
           title: Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: Text(
-              'SOS',
-            ),
+            child: Text(_title.elementAt(_selectedIndex)),
           ),
-           backgroundColor: Color(0xFFD40C16),
+          backgroundColor: Color(0xFFD40C16),
         ),
         drawer: _hamburguerMenu(),
         bottomNavigationBar: _bottomNavigationBar(),
@@ -37,7 +37,6 @@ class _HomePageState extends State<HomePage> {
         body: Center(
           child: _widgetOptions.elementAt(_selectedIndex),
         ));
-        
   }
 
   _hamburguerMenu() {
