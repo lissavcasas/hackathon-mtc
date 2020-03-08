@@ -1,7 +1,7 @@
-import 'package:alertmtc/main.dart';
+//import 'package:alertmtc/main.dart';
 import 'package:alertmtc/pages/emergencies_page.dart';
 import 'package:alertmtc/pages/historial_page.dart';
-import 'package:alertmtc/pages/maps.dart';
+//import 'package:alertmtc/pages/maps.dart';
 import 'package:alertmtc/pages/sos_page.dart';
 import 'package:flutter/material.dart';
 
