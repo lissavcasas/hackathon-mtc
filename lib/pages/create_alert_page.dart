@@ -84,11 +84,11 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
               getAccidentTypes(),
               SizedBox(height: 10),
               getGrades(),
-              SizedBox(height: 55),
+              SizedBox(height: 50),
               takePictureBtn(),
-              SizedBox(height: 30),
+              SizedBox(height: 10),
               createAlertBtn(),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
             ],
           ),
         ),
@@ -139,13 +139,10 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
       decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0, // has the effect of softening the shadow
-            spreadRadius: 2, // has the effect of extending the shadow
+            color: Colors.grey[50],
           )
         ],
         borderRadius: new BorderRadius.circular(10.0),
-        //gradient: new LinearGradient(),
       ),
       child: Card(
         //elevation: 0.0,
@@ -189,13 +186,10 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
       decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0, // has the effect of softening the shadow
-            spreadRadius: 2, // has the effect of extending the shadow
+            color: Colors.grey[50],
           )
         ],
         borderRadius: new BorderRadius.circular(10.0),
-        //gradient: new LinearGradient(),
       ),
       child: Card(
         //elevation: 0.0,
@@ -238,13 +232,10 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
       decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0, // has the effect of softening the shadow
-            spreadRadius: 2, // has the effect of extending the shadow
+            color: Colors.grey[50],
           )
         ],
         borderRadius: new BorderRadius.circular(10.0),
-        //gradient: new LinearGradient(),
       ),
       child: Card(
         //elevation: 0.0,
@@ -285,16 +276,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.19,
-      decoration: new BoxDecoration(
+       decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0, // has the effect of softening the shadow
-            spreadRadius: 2, // has the effect of extending the shadow
+            color: Colors.grey[50],
           )
         ],
         borderRadius: new BorderRadius.circular(10.0),
-        //gradient: new LinearGradient(),
       ),
       child: Card(
         //elevation: 0.0,
@@ -335,16 +323,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.19,
-      decoration: new BoxDecoration(
+       decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0, // has the effect of softening the shadow
-            spreadRadius: 2, // has the effect of extending the shadow
+            color: Colors.grey[50],
           )
         ],
         borderRadius: new BorderRadius.circular(10.0),
-        //gradient: new LinearGradient(),
       ),
       child: Card(
         //elevation: 0.0,
@@ -385,16 +370,13 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
     return Container(
       width: MediaQuery.of(context).size.width * 0.30,
       height: MediaQuery.of(context).size.height * 0.19,
-      decoration: new BoxDecoration(
+       decoration: new BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.black12,
-            blurRadius: 5.0, // has the effect of softening the shadow
-            spreadRadius: 2, // has the effect of extending the shadow
+            color: Colors.grey[50],
           )
         ],
         borderRadius: new BorderRadius.circular(10.0),
-        //gradient: new LinearGradient(),
       ),
       child: Card(
         //elevation: 0.0,
