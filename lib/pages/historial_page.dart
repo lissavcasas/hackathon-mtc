@@ -1,13 +1,23 @@
+import 'package:alertmtc/models/accident_report_model.dart';
+import 'package:alertmtc/providers/alert_report_provider.dart';
+import 'package:alertmtc/utils/dateformat.dart';
+import 'package:alertmtc/widgets/ticket_state.dart';
 import 'package:flutter/material.dart';
 
 class HistorialPage extends StatefulWidget {
-  HistorialPage({Key key}) : super(key: key);
-
   @override
   _HistorialPageState createState() => _HistorialPageState();
 }
 
 class _HistorialPageState extends State<HistorialPage> {
+  Future<List<AccidentReportModel>> _accidentReportList;
+  final alertReportProvider = new AlertReportProvider();
+  @override
+  void initState() {
+    super.initState();
+    _accidentReportList = alertReportProvider.getAllAccidentReports();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -67,28 +77,67 @@ class _HistorialPageState extends State<HistorialPage> {
     );
   }
 
-  Widget _alertList() => ListView(
-        children: [
-          _tile('Despiste y Volcadura', 'Texto de prueba', Icons.motorcycle),
-          _tile('Atropello común', 'Texto de prueba', Icons.accessibility),
-          _tile('Atropello común', 'Texto de prueba', Icons.accessibility),
-          _tile('Atropello fuga', 'Texto de prueba', Icons.accessible_forward),
-          _tile('Atropello fuga', 'Texto de prueba', Icons.accessible_forward),
-          _tile('Atropello fuga', 'Texto de prueba', Icons.accessible_forward),
-          _tile('Despiste y Volcadura', 'Texto de prueba', Icons.motorcycle),
-          _tile('Otros', 'Texto de prueba', Icons.motorcycle),
-          _tile('Despiste y Volcadura', 'Texto de prueba', Icons.motorcycle),
-          _tile('Despiste y Volcadura', 'Texto de prueba', Icons.motorcycle),
-        ],
+  Widget _alertList() => FutureBuilder(
+        future: _accidentReportList,
+        builder: (BuildContext context,
+            AsyncSnapshot<List<AccidentReportModel>> snapshot) {
+          if (snapshot.hasData) {
+            return _buildAlertReportList(snapshot.data);
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        },
       );
 
-  ListTile _tile(String title, String subtitle, IconData icon) => ListTile(
+  Widget _buildAlertReportList(List<AccidentReportModel> accidentReports) =>
+      ListView.builder(
+          itemCount: accidentReports.length,
+          itemBuilder: (context, i) => _tile(
+              title: accidentReports[i].type,
+              stateName: accidentReports[i].accidentReportStateData.name,
+              stateId: accidentReports[i].accidentReportStateData.id,
+              icon: getIconByType(accidentReports[i].type),
+              createdAt: accidentReports[i].createdAt));
+
+  IconData getIconByType(String type) {
+    switch (type) {
+      case 'Choque':
+        return Icons.motorcycle;
+        break;
+      case 'Atropello común':
+        return Icons.accessibility;
+        break;
+      case 'Atropello fuga':
+        return Icons.accessible_forward;
+        break;
+      case 'Caída de vehículo en movimiento':
+        return Icons.surround_sound;
+        break;
+      case 'Choque fuga':
+        return Icons.assignment_late;
+        break;
+      case 'Otros':
+        return Icons.apps;
+        break;
+      default:
+        return Icons.airport_shuttle;
+    }
+  }
+
+  ListTile _tile(
+          {String title,
+          String stateName,
+          int stateId,
+          IconData icon,
+          DateTime createdAt}) =>
+      ListTile(
         title: Text(title,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 20,
             )),
-        subtitle: Text(subtitle),
+        subtitle: Text("")
+        /* TicketState(ticketId: stateId, ticketName: stateName) */,
         leading: Icon(
           icon,
           color: Color(0xFFD40C16),
@@ -96,7 +145,7 @@ class _HistorialPageState extends State<HistorialPage> {
         trailing: Container(
           width: 40,
           child: Text(
-            '07-03',
+            DateFormat.humanLanguageFormat(createdAt),
             style: TextStyle(fontSize: 9, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),

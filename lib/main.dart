@@ -1,5 +1,5 @@
+import 'package:alertmtc/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'src/routes/routes.dart';
 
 void main() => runApp(MyApp());
 
