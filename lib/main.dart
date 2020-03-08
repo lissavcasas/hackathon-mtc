@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         primaryColor: const Color(0xFFD40C16),
       ),
-      initialRoute: 'splash-page',
+      initialRoute: 'splash-page', //splash
       routes: getApplicationRoutes(),
     );
   }
