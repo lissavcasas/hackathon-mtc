@@ -16,9 +16,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     SOSPage(),
-    Maps(),
+    // Maps(),
     HistorialPage(),
-    // EmergenciesPage(),
+    EmergenciesPage(),
   ];
   List<String> _title = ['SOS', 'Historial', 'Emergencias'];
 
