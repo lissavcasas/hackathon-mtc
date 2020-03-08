@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         primaryColor: const Color(0xFFD40C16),
       ),
-      initialRoute: 'home-page',
+      initialRoute: 'phone-auth',
       routes: getApplicationRoutes(),
     );
   }
