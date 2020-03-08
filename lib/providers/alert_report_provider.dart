@@ -4,7 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:dio/dio.dart';
 import 'package:alertmtc/models/accident_report_model.dart';
 
-final String _url = 'http://10.0.2.2:3000/api/v1';
+// final String _url = 'http://10.0.2.2:3000/api/v1';
+final String _url = 'http://159.89.135.117:3000/api/v1';
 
 class AlertReportProvider {
   Future<Map<String, dynamic>> storeTicket({

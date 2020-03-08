@@ -91,13 +91,14 @@ class _HistorialPageState extends State<HistorialPage> {
 
   Widget _buildAlertReportList(List<AccidentReportModel> accidentReports) =>
       ListView.builder(
-          itemCount: accidentReports.length,
-          itemBuilder: (context, i) => _tile(
-              title: accidentReports[i].type,
-              stateName: accidentReports[i].accidentReportStateData.name,
-              stateId: accidentReports[i].accidentReportStateData.id,
-              icon: getIconByType(accidentReports[i].type),
-              createdAt: accidentReports[i].createdAt));
+        itemCount: accidentReports.length,
+        itemBuilder: (context, i) => _tile(
+            title: accidentReports[i].type,
+            stateName: accidentReports[i].accidentReportStateData.name,
+            stateId: accidentReports[i].accidentReportStateData.id,
+            icon: getIconByType(accidentReports[i].type),
+            createdAt: accidentReports[i].createdAt),
+      );
 
   IconData getIconByType(String type) {
     switch (type) {
@@ -136,8 +137,7 @@ class _HistorialPageState extends State<HistorialPage> {
               fontWeight: FontWeight.w500,
               fontSize: 20,
             )),
-        subtitle: Text("")
-        /* TicketState(ticketId: stateId, ticketName: stateName) */,
+        subtitle: TicketState(ticketId: stateId, ticketName: stateName),
         leading: Icon(
           icon,
           color: Color(0xFFD40C16),
