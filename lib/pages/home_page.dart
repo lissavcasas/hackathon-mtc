@@ -1,5 +1,7 @@
+import 'package:alertmtc/main.dart';
 import 'package:alertmtc/pages/emergencies_page.dart';
 import 'package:alertmtc/pages/historial_page.dart';
+import 'package:alertmtc/pages/maps.dart';
 import 'package:alertmtc/pages/sos_page.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +16,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   static List<Widget> _widgetOptions = <Widget>[
     SOSPage(),
+    Maps(),
     HistorialPage(),
-    EmergenciesPage(),
+    // EmergenciesPage(),
   ];
   List<String> _title = ['SOS', 'Historial', 'Emergencias'];
 
