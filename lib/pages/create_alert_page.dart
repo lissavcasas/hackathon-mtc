@@ -1,14 +1,16 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:alertmtc/providers/alert_report_provider.dart';
 import 'package:alertmtc/unicorn_button.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:location/location.dart';
-//import 'package:image_picker/image_picker.dart';
 
 class CreateAlertPage extends StatefulWidget {
   @override
   _CreateAlertPageState createState() => _CreateAlertPageState();
+  final double latitude;
+  final double longitude;
+  CreateAlertPage({this.latitude, this.longitude});
 }
 
 class _CreateAlertPageState extends State<CreateAlertPage> {
@@ -577,7 +579,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
             shape: BoxShape.circle,
             image: new DecorationImage(
               fit: BoxFit.fill,
-              image: AssetImage(_image.path),
+              image: FileImage(_image),
             ),
           ),
         ),
@@ -586,10 +588,17 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   }
 
   void openCamera() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.camera);
-    setState(() {
-      _image = image;
-    });
+    try {
+      var image = await ImagePicker.pickImage(source: ImageSource.camera);
+      setState(() {
+        _image = image;
+      });
+    } catch (err) {
+      print("****");
+      print(err);
+      final snackBar = SnackBar(content: Text('Error al cargar la cámara'));
+      _scaffolKey.currentState.showSnackBar(snackBar);
+    }
   }
 
   Widget createAlertBtn() {
@@ -616,7 +625,6 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
           color: Color(0xFFD40C16),
           textColor: Colors.white,
           onPressed: () {
-            print('holi');
             _updateUserLogged();
           },
         ),
@@ -625,14 +633,12 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
   }
 
   _updateUserLogged() async {
-    Location location = new Location();
-    final pos = await location.getLocation();
     final response = await alertReportProvider.storeTicket(
         type: type,
         severity: severity,
         files: _image,
-        latitude: pos.latitude.toString(),
-        longitude: pos.longitude.toString());
+        latitude: widget.latitude.toString(),
+        longitude: widget.longitude.toString());
     if (response['code'] == 200) {
       final snackBar = SnackBar(content: Text(response['message']));
       _scaffolKey.currentState.showSnackBar(snackBar);
@@ -641,6 +647,7 @@ class _CreateAlertPageState extends State<CreateAlertPage> {
         severity = null;
         _image = null;
       });
+      Timer(Duration(seconds: 2), () => Navigator.of(context).pop());
     } else {
       final snackBar = SnackBar(content: Text(response['message']));
       _scaffolKey.currentState.showSnackBar(snackBar);

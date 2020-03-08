@@ -17,15 +17,34 @@ class _SOSPageState extends State<SOSPage> {
   );
 
   Completer<GoogleMapController> _mapController = Completer();
+  GoogleMapController mapController;
+  CameraPosition _lastPosition = CameraPosition(
+    target: LatLng(-12.0463717, -77.0427533),
+    zoom: 14.4746,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: GoogleMap(
-          mapType: MapType.normal,
-          initialCameraPosition: _latLongMap,
-          onMapCreated: (GoogleMapController controller) {
-            _mapController.complete(controller);
-          },
+        body: Stack(
+          children: <Widget>[
+            GoogleMap(
+              mapType: MapType.normal,
+              initialCameraPosition: _latLongMap,
+              onCameraMove: (CameraPosition position) {
+                _lastPosition = position;
+              },
+              onMapCreated: (GoogleMapController controller) {
+                _mapController.complete(controller);
+              },
+            ),
+            Center(
+              child: Icon(
+                Icons.location_on,
+                color: Color(0xFFD40C16),
+                size: 40,
+              ),
+            )
+          ],
         ),
         floatingActionButton: Row(
           children: <Widget>[
@@ -35,7 +54,7 @@ class _SOSPageState extends State<SOSPage> {
               child: FloatingActionButton(
                 heroTag: 'btn1',
                 backgroundColor: Colors.blueGrey,
-                child: Icon(Icons.add_location),
+                child: Icon(Icons.location_searching),
                 onPressed: _myLocation,
               ),
             ),
@@ -45,7 +64,13 @@ class _SOSPageState extends State<SOSPage> {
               backgroundColor: Color(0xFFD40C16),
               child: Text('SOS'),
               onPressed: () {
-                Navigator.of(context).pushNamed('create-alert-page');
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (BuildContext context) {
+                  return CreateAlertPage(
+                    latitude: _lastPosition.target.latitude,
+                    longitude: _lastPosition.target.longitude,
+                  );
+                }));
               },
             )
           ],
